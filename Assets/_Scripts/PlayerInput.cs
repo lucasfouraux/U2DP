@@ -58,13 +58,5 @@ public class PlayerInput : MonoBehaviour
     protected Vector2 GetMovementVector() {
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
-
-    
-
-    
-
-    
-
-    
 }
  
