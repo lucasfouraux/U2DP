@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class State : MonoBehaviour
-{
+public abstract class State : MonoBehaviour {
     protected Agent agent;
     public UnityEvent onEnter, onExit;
 

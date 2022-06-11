@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Agent : MonoBehaviour
-{
+public class Agent : MonoBehaviour {
     public Rigidbody2D rb2d;
     public PlayerInput agentInput;
     public AgentAnimation animationManager;
@@ -34,7 +33,7 @@ public class Agent : MonoBehaviour
         }
     }
 
-    internal void TransitionToState(State moveState, IdleState idleState) {
+    internal void TransitionToState(State desiredState, State callingState) {
         throw new NotImplementedException();
     }
 }

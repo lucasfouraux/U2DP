@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerInput : MonoBehaviour
-{
+public class PlayerInput : MonoBehaviour {
     [field: SerializeField]
     public Vector2 MovementVector { get; private set; }
     public event Action OnAttack, OnJumpPressed, OnJumpReleased, OnWeaponChange;

@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : State
-{
+public class IdleState : State {
     public State MoveState;
 
     protected override void EnterState() {
