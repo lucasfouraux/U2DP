@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,5 +32,9 @@ public class Agent : MonoBehaviour
                 animationManager.PlayAnimation(AnimationType.idle);
             rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         }
+    }
+
+    internal void TransitionToState(State moveState, IdleState idleState) {
+        throw new NotImplementedException();
     }
 }
