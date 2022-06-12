@@ -8,6 +8,7 @@ public class Agent : MonoBehaviour {
     public PlayerInput agentInput;
     public AgentAnimation animationManager;
     public AgentRenderer agentRenderer;
+    public GroundDetector groundDetector;
 
     public State currentState = null, previousState = null;
     public State IdleState;
@@ -20,6 +21,8 @@ public class Agent : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         animationManager = GetComponentInChildren<AgentAnimation>();
         agentRenderer = GetComponentInChildren<AgentRenderer>();
+        groundDetector = GetComponentInChildren<GroundDetector>();
+
         State[] states = GetComponentsInChildren<State>();
         foreach(var state in states) {
             state.initializeState(this);
@@ -53,6 +56,7 @@ public class Agent : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        groundDetector.CheckIsGrounded();
         currentState.StateFixedUpdate();
     }
 }
