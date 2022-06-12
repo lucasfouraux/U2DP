@@ -10,7 +10,7 @@ public class MovementState : State {
 
     public float acceleration, deacceleration, maxSpeed;
 
-    private void awake() {
+    private void Awake() {
         movementData = GetComponentInParent<MovementData>();
     }
 
@@ -22,12 +22,12 @@ public class MovementState : State {
         movementData.currentVelocity = Vector2.zero;
     }
 
-    public override void stateUpdate() {
-        base.stateUpdate();
+    public override void StateUpdate() {
+        base.StateUpdate();
         CalculateVelocity();
         SetPlayerVelocity();
         if(Mathf.Abs(agent.rb2d.velocity.x) < 0.01f) {
-            agent.TransitionToState(idleState, this);
+            agent.TransitionToState(idleState);
         }
     }
 

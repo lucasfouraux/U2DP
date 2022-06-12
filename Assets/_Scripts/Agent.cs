@@ -9,31 +9,50 @@ public class Agent : MonoBehaviour {
     public AgentAnimation animationManager;
     public AgentRenderer agentRenderer;
 
+    public State currentState = null, previousState = null;
+    public State IdleState;
+    
+    [Header("State debugging:")]
+    public string stateName = "";
+
     void Awake() {
         agentInput = GetComponentInParent<PlayerInput>();
         rb2d = GetComponent<Rigidbody2D>();
         animationManager = GetComponentInChildren<AgentAnimation>();
         agentRenderer = GetComponentInChildren<AgentRenderer>();
-    }
-
-    void Start() {
-        agentInput.OnMovement += HandleMovement;
-        agentInput.OnMovement += agentRenderer.FaceDirection;
-    }
-
-    private void HandleMovement(Vector2 input) {
-        if(Mathf.Abs(input.x) > 0) {
-            if(Mathf.Abs(rb2d.velocity.x) < 0.01f)
-                animationManager.PlayAnimation(AnimationType.run);
-            rb2d.velocity = new Vector2(input.x * 5, rb2d.velocity.y);
-        } else {
-            if(Mathf.Abs(rb2d.velocity.x) > 0)
-                animationManager.PlayAnimation(AnimationType.idle);
-            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        State[] states = GetComponentsInChildren<State>();
+        foreach(var state in states) {
+            state.initializeState(this);
         }
     }
 
-    internal void TransitionToState(State desiredState, State callingState) {
-        throw new NotImplementedException();
+    void Start() {
+        agentInput.OnMovement += agentRenderer.FaceDirection;
+        TransitionToState(IdleState);
+    }
+
+    internal void TransitionToState(State desiredState) {
+        if(desiredState == null)
+            return;
+        if(currentState != null) 
+            currentState.Exit();
+        previousState = currentState;
+        currentState = desiredState;
+        currentState.Enter();
+
+        DisplayState();
+    }
+
+    private void DisplayState() {
+        if(previousState == null || previousState.GetType() != currentState.GetType())
+            stateName = currentState.GetType().ToString();
+    }
+    
+    private void Update() {
+        currentState.StateUpdate();
+    }
+
+    private void FixedUpdate() {
+        currentState.StateFixedUpdate();
     }
 }

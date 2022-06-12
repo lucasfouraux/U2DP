@@ -37,10 +37,10 @@ public abstract class State : MonoBehaviour {
     protected virtual void HandleMovement(Vector2 obj) {
     }
 
-    public virtual void stateUpdate() {
+    public virtual void StateUpdate() {
     }
 
-    public virtual void stateFixedUpdate() {
+    public virtual void StateFixedUpdate() {
     }
 
     public void Exit() {
