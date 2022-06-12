@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpState : MovementState {
-  public float jumpForce = 12;
-  public float lowJumpMultiplier = 2;
   private bool jumpPressed = false;
   protected override void EnterState() {
     agent.animationManager.PlayAnimation(AnimationType.jump);
     movementData.currentVelocity = agent.rb2d.velocity;
-    movementData.currentVelocity.y = jumpForce;
+    movementData.currentVelocity.y = agent.agentData.jumpForce;
     agent.rb2d.velocity = movementData.currentVelocity;
     jumpPressed = true;
   }
@@ -34,7 +32,7 @@ public class JumpState : MovementState {
   private void ControlJumpHeight() {
     if(!jumpPressed) {
       movementData.currentVelocity = agent.rb2d.velocity;
-      movementData.currentVelocity.y += lowJumpMultiplier * Physics2D.gravity.y * Time.deltaTime;
+      movementData.currentVelocity.y += agent.agentData.lowJumpMultiplier * Physics2D.gravity.y * Time.deltaTime;
       agent.rb2d.velocity = movementData.currentVelocity;
     }
   }

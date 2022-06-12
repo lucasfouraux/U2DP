@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FallState : MovementState {
-    public float gravityModifier = 0.5f;
-
     protected override void EnterState() {
         agent.animationManager.PlayAnimation(AnimationType.fall);
     }
@@ -15,7 +13,7 @@ public class FallState : MovementState {
 
     public override void StateUpdate() {
         movementData.currentVelocity = agent.rb2d.velocity;
-        movementData.currentVelocity.y += gravityModifier * Physics2D.gravity.y * Time.deltaTime;
+        movementData.currentVelocity.y += agent.agentData.gravityModifier * Physics2D.gravity.y * Time.deltaTime;
         agent.rb2d.velocity = movementData.currentVelocity;
 
         CalculateVelocity();
