@@ -5,8 +5,6 @@ using UnityEngine;
 public class JumpState : MovementState {
   public float jumpForce = 12;
   public float lowJumpMultiplier = 2;
-  public State FallState;
-
   private bool jumpPressed = false;
   protected override void EnterState() {
     agent.animationManager.PlayAnimation(AnimationType.jump);
