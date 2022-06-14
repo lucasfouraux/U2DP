@@ -15,9 +15,9 @@ public class MovementState : State {
     protected override void EnterState() {
         agent.animationManager.PlayAnimation(AnimationType.run);
 
-        movementData.horizontalMovementDirection = 0;
-        movementData.currentSpeed = 0;
-        movementData.currentVelocity = Vector2.zero;
+        // movementData.horizontalMovementDirection = 0;
+        // movementData.currentSpeed = 0;
+        // movementData.currentVelocity = Vector2.zero;
     }
 
     public override void StateUpdate() {
