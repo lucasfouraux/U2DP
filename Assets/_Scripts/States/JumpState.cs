@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JumpState : MovementState {
   private bool jumpPressed = false;
+  [SerializeField]
+  protected State ClimbState;
   protected override void EnterState() {
     agent.animationManager.PlayAnimation(AnimationType.jump);
     movementData.currentVelocity = agent.rb2d.velocity;
@@ -24,9 +26,10 @@ public class JumpState : MovementState {
     ControlJumpHeight();
     CalculateVelocity();
     SetPlayerVelocity();
-    if(agent.rb2d.velocity.y <= 0) {
+    if(agent.rb2d.velocity.y <= 0)
       agent.TransitionToState(FallState);
-    }
+    else if(agent.climbingDetector.CanClimb && Mathf.Abs(agent.agentInput.MovementVector.y) > 0)
+      agent.TransitionToState(ClimbState);
   }
 
   private void ControlJumpHeight() {

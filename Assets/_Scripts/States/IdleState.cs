@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class IdleState : State {
-    public State MoveState;
+    public State MoveState, ClimbState;
 
     protected override void EnterState() {
         agent.animationManager.PlayAnimation(AnimationType.idle);
@@ -12,7 +12,10 @@ public class IdleState : State {
     }
 
     protected override void HandleMovement(Vector2 input) {
-        if(Mathf.Abs(input.x) > 0) {
+        if(agent.climbingDetector.CanClimb && Mathf.Abs(input.y) > 0) {
+            agent.TransitionToState(ClimbState);
+        }
+        else if(Mathf.Abs(input.x) > 0) {
             agent.TransitionToState(MoveState);
         }
     }

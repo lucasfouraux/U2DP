@@ -39,6 +39,14 @@ public class AgentAnimation : MonoBehaviour {
       }
     }
 
+    public void StopAnimation() {
+      animator.enabled = false;
+    }
+
+    public void StartAnimation() {
+      animator.enabled = true;
+    }
+
     private void Play(string name) {
       animator.Play(name, -1, 0f);
     }

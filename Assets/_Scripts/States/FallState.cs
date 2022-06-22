@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FallState : MovementState {
+    [SerializeField]
+    protected State ClimbState;
     protected override void EnterState() {
         agent.animationManager.PlayAnimation(AnimationType.fall);
     }
@@ -21,5 +23,7 @@ public class FallState : MovementState {
 
         if(agent.groundDetector.isGrounded)
             agent.TransitionToState(idleState);
+        else if(agent.climbingDetector.CanClimb && Mathf.Abs(agent.agentInput.MovementVector.y) > 0)
+            agent.TransitionToState(ClimbState);
     }
 }
