@@ -9,10 +9,6 @@ public class HealthUI : MonoBehaviour {
     [SerializeField]
     private LifeElementUI healthPrefab;
 
-    private void Start() {
-        Initialize(4);
-    }
-
     public void Initialize(int maxHealth) {
         healthImages = new List<LifeElementUI>();
         foreach(Transform child in transform) {
