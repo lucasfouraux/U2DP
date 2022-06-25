@@ -21,7 +21,7 @@ public class HealthUI : MonoBehaviour {
         }
     }
 
-    public void SetHeath(int currentHealth) {
+    public void SetHealth(int currentHealth) {
         for(int i = 0; i < healthImages.Count; i++) {
             if( i < currentHealth) {
                 healthImages[i].SetSprite(fullHealth);
