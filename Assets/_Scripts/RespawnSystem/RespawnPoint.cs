@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace RespawnPoint {
+namespace RespawnSystem {
     public class RespawnPoint : MonoBehaviour {
         [SerializeField]
         private GameObject respawnTarget;
@@ -14,7 +14,6 @@ namespace RespawnPoint {
             if(collision.CompareTag("Player")) {
                 this.respawnTarget = collision.gameObject;
                 OnSpawnPointActivated?.Invoke();
-                GetComponent<Collider2D>().enabled = false;
             }
         }
 
@@ -28,7 +27,7 @@ namespace RespawnPoint {
         }
 
         public void DisableRespawnPoint() {
-            gameObject.SetActive(false);
+            GetComponent<Collider2D>().enabled = false;
         }
 
         public void ResetRespawnPoint() {
